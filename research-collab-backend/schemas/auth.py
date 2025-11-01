@@ -21,3 +21,6 @@ class UserOut(BaseModel):
 class TokenOut(BaseModel):
     user: UserOut
     accessToken: str
+
+class GoogleAuthRequest(BaseModel):
+    credential: str  # Google OAuth token

@@ -1,22 +1,286 @@
-# Logs
-logs
-*.log
+# ========================================
+# ENVIRONMENT VARIABLES & SECRETS
+# ========================================
+# CRITICAL: Never commit these files!
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+*.env
+!.env.example
+!**/.env.example
+research-collab-backend/.env
+research-collab-backend/.env.*
+!research-collab-backend/.env.example
+
+# Environment variable backups
+.env.backup
+.env.*.backup
+
+# ========================================
+# API KEYS & CREDENTIALS
+# ========================================
+# Google OAuth
+google-credentials.json
+client_secret*.json
+
+# MongoDB
+mongodb.conf
+mongo-credentials.txt
+
+# Pinata IPFS
+pinata-keys.txt
+
+# JWT Secrets
+jwt-secret.txt
+
+# Any file with 'secret' or 'key' in name
+*secret*.txt
+*secret*.json
+*key*.txt
+*key*.json
+*credentials*.txt
+*credentials*.json
+*password*.txt
+
+# ========================================
+# PYTHON BACKEND
+# ========================================
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+research-collab-backend/venv/
+research-collab-backend/env/
+
+# PyCharm
+.idea/
+*.iml
+
+# VS Code Python
+.vscode/
+.history/
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# ========================================
+# NODE.JS / REACT
+# ========================================
+# Dependencies
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Production builds
+dist/
+dist-ssr/
+build/
 *.local
 
-# Editor directories and files
+# Testing
+coverage/
+
+# ========================================
+# DATABASE FILES
+# ========================================
+# MongoDB data
+data/
+mongodb-data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Database dumps
+*.sql
+*.dump
+*.bak
+
+# ========================================
+# UPLOADS & USER FILES
+# ========================================
+# User uploaded files (profiles, posts)
+research-collab-backend/uploads/*
+!research-collab-backend/uploads/.gitkeep
+!research-collab-backend/uploads/profiles/
+!research-collab-backend/uploads/posts/
+research-collab-backend/uploads/profiles/*
+!research-collab-backend/uploads/profiles/.gitkeep
+research-collab-backend/uploads/posts/*
+!research-collab-backend/uploads/posts/.gitkeep
+uploads/
+temp/
+tmp/
+
+# ========================================
+# LOGS
+# ========================================
+logs/
+*.log
+error.log
+access.log
+debug.log
+combined.log
+
+# ========================================
+# OPERATING SYSTEM FILES
+# ========================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ========================================
+# EDITOR & IDE
+# ========================================
+# Visual Studio Code
 .vscode/*
 !.vscode/extensions.json
-.idea
+!.vscode/settings.json.example
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.idea_modules/
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+*.swp
+*.swo
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+
+# ========================================
+# TEMPORARY FILES
+# ========================================
+*.tmp
+*.temp
+*.bak
+*.backup
+*.cache
+.cache/
+
+# ========================================
+# COMPILED FILES
+# ========================================
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.dylib
+
+# ========================================
+# PACKAGE MANAGERS
+# ========================================
+# npm
+package-lock.json.backup
+.npm
+
+# yarn
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# pnpm
+.pnpm-debug.log
+
+# ========================================
+# DOCKER
+# ========================================
+docker-compose.override.yml
+.dockerignore
+
+# ========================================
+# SSL CERTIFICATES
+# ========================================
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+*.pfx
+ssl/
+certs/
+
+# ========================================
+# TESTING & CI/CD
+# ========================================
+.pytest_cache/
+.coverage
+.coverage.*
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+
+# ========================================
+# DEPLOYMENT
+# ========================================
+.vercel
+.netlify
+.firebase/
+.serverless/
+
+# ========================================
+# MISC
+# ========================================
 .DS_Store
+*.local
 *.suo
 *.ntvs*
 *.njsproj

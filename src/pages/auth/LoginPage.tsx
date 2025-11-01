@@ -6,17 +6,22 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
+import { useToast } from '@/hooks/use-toast';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
 
 // inside LoginPage component
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
+  setIsLoading(true);
   try {
     const res = await fetch("http://127.0.0.1:8000/auth/login", {
       method: "POST",
@@ -29,18 +34,85 @@ const handleSubmit = async (e: React.FormEvent) => {
 
     if (!res.ok) {
       const err = await res.json();
-      alert(err.detail || "Login failed");
+      toast({
+        title: "Login Failed",
+        description: err.detail || "Invalid credentials",
+        variant: "destructive"
+      });
       return;
     }
     const data = await res.json();
     // Save token & user
     localStorage.setItem("accessToken", data.accessToken);
     localStorage.setItem("currentUser", JSON.stringify(data.user));
+    
+    toast({
+      title: "Welcome back!",
+      description: "You have successfully logged in."
+    });
+    
     navigate("/dashboard");
   } catch (err) {
     console.error(err);
-    alert("Network error");
+    toast({
+      title: "Error",
+      description: "Network error. Please try again.",
+      variant: "destructive"
+    });
+  } finally {
+    setIsLoading(false);
   }
+};
+
+const handleGoogleSuccess = async (credentialResponse: CredentialResponse) => {
+  setIsLoading(true);
+  try {
+    const res = await fetch("http://127.0.0.1:8000/auth/google", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        credential: credentialResponse.credential
+      })
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      toast({
+        title: "Google Sign-In Failed",
+        description: err.detail || "Authentication failed",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const data = await res.json();
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("currentUser", JSON.stringify(data.user));
+    
+    toast({
+      title: "Welcome!",
+      description: `Signed in as ${data.user.name}`
+    });
+    
+    navigate("/dashboard");
+  } catch (err) {
+    console.error(err);
+    toast({
+      title: "Error",
+      description: "Network error. Please try again.",
+      variant: "destructive"
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+const handleGoogleError = () => {
+  toast({
+    title: "Google Sign-In Failed",
+    description: "Unable to sign in with Google. Please try again.",
+    variant: "destructive"
+  });
 };
 
 
@@ -114,9 +186,36 @@ const handleSubmit = async (e: React.FormEvent) => {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full hero-gradient text-white hover-lift">
-                Sign In
+              <Button 
+                type="submit" 
+                className="w-full hero-gradient text-white hover-lift"
+                disabled={isLoading}
+              >
+                {isLoading ? "Signing in..." : "Sign In"}
               </Button>
+
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-background px-2 text-muted-foreground">
+                    Or continue with
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex justify-center">
+                <GoogleLogin
+                  onSuccess={handleGoogleSuccess}
+                  onError={handleGoogleError}
+                  useOneTap
+                  theme="outline"
+                  size="large"
+                  text="signin_with"
+                  shape="rectangular"
+                />
+              </div>
 
               <div className="text-center">
                 <a href="#" className="text-sm text-muted-foreground hover:text-foreground">

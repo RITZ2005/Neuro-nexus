@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import { AuthProvider } from "@/contexts/AuthContext";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AppLayout } from "@/components/layout/AppLayout";
 
 // Pages
@@ -21,17 +21,16 @@ import Publish from "./pages/Publish";
 import Feed from "./pages/Feed";
 import Notifications from "./pages/Notifications";
 import Settings from "./pages/Settings";
-import Feed from "./pages/Feed";
 import Network from "./pages/Network";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <ThemeProvider defaultTheme="system" storageKey="open-science-theme">
-<<<<<<< HEAD
-      <AuthProvider>
+    <GoogleOAuthProvider clientId={googleClientId}>
+      <ThemeProvider defaultTheme="system" storageKey="open-science-theme">
         <TooltipProvider>
           <Toaster />
           <Sonner />
@@ -44,12 +43,15 @@ const App = () => (
               {/* Protected Routes with Layout */}
               <Route path="/" element={<AppLayout />}>
                 <Route path="dashboard" element={<Dashboard />} />
-                <Route path="feed" element={<Feed />} />
-                <Route path="network" element={<Network />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="collaborators" element={<Collaborators />} />
                 <Route path="projects" element={<Projects />} />
+                <Route path="projects/:projectId/settings" element={<ProjectSettings />} />
+                <Route path="projects/:projectId/workspace" element={<ProjectWorkspace />} />
                 <Route path="publish" element={<Publish />} />
+                <Route path="feed" element={<Feed />} />
+                <Route path="network" element={<Network />} />
+                <Route path="notifications" element={<Notifications />} />
                 <Route path="settings" element={<Settings />} />
               </Route>
               
@@ -57,37 +59,8 @@ const App = () => (
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
-      </AuthProvider>
-=======
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
-            
-            {/* Protected Routes with Layout */}
-            <Route path="/" element={<AppLayout />}>
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="collaborators" element={<Collaborators />} />
-              <Route path="projects" element={<Projects />} />
-              <Route path="projects/:projectId/settings" element={<ProjectSettings />} />
-              <Route path="projects/:projectId/workspace" element={<ProjectWorkspace />} />
-              <Route path="publish" element={<Publish />} />
-              <Route path="feed" element={<Feed />} />
-              <Route path="notifications" element={<Notifications />} />
-              <Route path="settings" element={<Settings />} />
-            </Route>
-            
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
->>>>>>> e634e94 (Update every feature)
-    </ThemeProvider>
+      </ThemeProvider>
+    </GoogleOAuthProvider>
   </QueryClientProvider>
 );
 

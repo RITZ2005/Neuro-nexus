@@ -57,6 +57,9 @@
 
 ### Authentication & Security
 - **JWT (JSON Web Tokens)** - Stateless authentication
+- **Google OAuth 2.0** - Social authentication with Google accounts
+- **@react-oauth/google** - React Google OAuth integration
+- **google-auth** - Python Google OAuth verification
 - **Passlib + bcrypt** - Password hashing
 - **python-jose** - JWT token generation/validation
 - **Cryptography (Fernet)** - File encryption for publications
@@ -159,6 +162,7 @@ connections/
   "tailwindcss": "^3.4.1",
   "@radix-ui/*": "Various versions",
   "@tiptap/*": "^2.26.3",
+  "@react-oauth/google": "Latest",
   "framer-motion": "^11.11.7",
   "react-latex-next": "^3.2.1",
   "latex.js": "^0.12.6",
@@ -177,6 +181,9 @@ python-jose[cryptography]
 python-multipart
 pydantic
 cryptography
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
 pinata-python-sdk
 ```
 
@@ -189,6 +196,7 @@ pinata-python-sdk
 /auth
   POST /register - User registration
   POST /login - User authentication
+  POST /google - Google OAuth authentication
   GET /me - Get current user
 
 /projects

@@ -7,6 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
+import { useToast } from '@/hooks/use-toast';
 
 const researchDomains = [
   'Artificial Intelligence',
@@ -25,6 +27,7 @@ const researchDomains = [
 
 const SignupPage = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,13 +35,19 @@ const SignupPage = () => {
     confirmPassword: '',
     domain: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
 
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   if (formData.password !== formData.confirmPassword) {
-    alert("Passwords do not match");
+    toast({
+      title: "Password Mismatch",
+      description: "Passwords do not match",
+      variant: "destructive"
+    });
     return;
   }
+  setIsLoading(true);
   try {
     const res = await fetch("http://127.0.0.1:8000/auth/signup", {
       method: "POST",
@@ -52,17 +61,84 @@ const handleSubmit = async (e: React.FormEvent) => {
     });
     if (!res.ok) {
       const err = await res.json();
-      alert(err.detail || "Signup failed");
+      toast({
+        title: "Signup Failed",
+        description: err.detail || "Unable to create account",
+        variant: "destructive"
+      });
       return;
     }
     const data = await res.json();
     localStorage.setItem("accessToken", data.accessToken);
     localStorage.setItem("currentUser", JSON.stringify(data.user));
+    
+    toast({
+      title: "Welcome to Open Science Nexus!",
+      description: "Your account has been created successfully."
+    });
+    
     navigate("/dashboard");
   } catch (err) {
     console.error(err);
-    alert("Network error");
+    toast({
+      title: "Error",
+      description: "Network error. Please try again.",
+      variant: "destructive"
+    });
+  } finally {
+    setIsLoading(false);
   }
+};
+
+const handleGoogleSuccess = async (credentialResponse: CredentialResponse) => {
+  setIsLoading(true);
+  try {
+    const res = await fetch("http://127.0.0.1:8000/auth/google", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        credential: credentialResponse.credential
+      })
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      toast({
+        title: "Google Sign-Up Failed",
+        description: err.detail || "Authentication failed",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const data = await res.json();
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("currentUser", JSON.stringify(data.user));
+    
+    toast({
+      title: "Welcome to Open Science Nexus!",
+      description: `Account created for ${data.user.name}`
+    });
+    
+    navigate("/dashboard");
+  } catch (err) {
+    console.error(err);
+    toast({
+      title: "Error",
+      description: "Network error. Please try again.",
+      variant: "destructive"
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+const handleGoogleError = () => {
+  toast({
+    title: "Google Sign-Up Failed",
+    description: "Unable to sign up with Google. Please try again.",
+    variant: "destructive"
+  });
 };
 
 
@@ -195,9 +271,35 @@ const handleSubmit = async (e: React.FormEvent) => {
                 </div>
               </div>
 
-              <Button type="submit" className="w-full hero-gradient text-white hover-lift">
-                Create Account
+              <Button 
+                type="submit" 
+                className="w-full hero-gradient text-white hover-lift"
+                disabled={isLoading}
+              >
+                {isLoading ? "Creating account..." : "Create Account"}
               </Button>
+
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-background px-2 text-muted-foreground">
+                    Or continue with
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex justify-center">
+                <GoogleLogin
+                  onSuccess={handleGoogleSuccess}
+                  onError={handleGoogleError}
+                  theme="outline"
+                  size="large"
+                  text="signup_with"
+                  shape="rectangular"
+                />
+              </div>
             </form>
           </CardContent>
         </Card>
