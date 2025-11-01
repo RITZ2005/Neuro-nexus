@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Open Science Platform Design System - Professional LinkedIn-style Theme */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 15%;
+    
+    /* LinkedIn Professional Colors */
+    --primary: 217 91% 39%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 217 91% 45%;
+    --primary-dark: 217 91% 33%;
+    
+    --secondary: 210 11% 71%;
+    --secondary-foreground: 0 0% 15%;
+    --secondary-light: 210 11% 85%;
+    
+    --accent: 0 0% 98%;
+    --accent-foreground: 0 0% 15%;
+    
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    
+    /* Professional UI Colors */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+    --card-border: 0 0% 90%;
+    
+    --research: 217 91% 39%;
+    --research-foreground: 0 0% 100%;
+    
+    --collaboration: 145 63% 42%;
+    --collaboration-foreground: 0 0% 100%;
+    
+    --publication: 217 91% 39%;
+    --publication-foreground: 0 0% 100%;
+    
+    /* Border & Input */
+    --border: 0 0% 90%;
+    --input: 0 0% 95%;
+    --ring: 217 91% 39%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --radius: 0.5rem;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 15%;
+    --sidebar-primary: 217 91% 39%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 15%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 217 91% 39%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 39%), hsl(145 63% 42%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(0 0% 98%));
+    --gradient-feature: linear-gradient(135deg, hsl(0 0% 98%), hsl(0 0% 96%));
+    
+    /* Shadows */
+    --shadow-soft: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-medium: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
+    --shadow-strong: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -4px hsl(0 0% 0% / 0.1);
+    --shadow-glow: 0 0 0 1px hsl(217 91% 39% / 0.05), 0 1px 3px 0 hsl(217 91% 39% / 0.1);
+    
+    /* Interactive */
+    --hover-lift: translateY(-2px);
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .dark {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 98%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 217 91% 70%;
+    --primary-dark: 217 91% 50%;
+    
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 98%;
+    --secondary-light: 0 0% 25%;
+    
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 98%;
+    
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 65%;
+    
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 98%;
+    --card-border: 0 0% 15%;
+    
+    --research: 217 91% 60%;
+    --research-foreground: 0 0% 100%;
+    
+    --collaboration: 145 63% 50%;
+    --collaboration-foreground: 0 0% 100%;
+    
+    --publication: 217 91% 60%;
+    --publication-foreground: 0 0% 100%;
+    
+    --border: 0 0% 15%;
+    --input: 0 0% 12%;
+    --ring: 217 91% 60%;
+    
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --sidebar-background: 0 0% 7%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 217 91% 60%;
+    
+    /* Dark theme gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%), hsl(145 63% 50%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 9%), hsl(0 0% 11%));
+    --gradient-feature: linear-gradient(135deg, hsl(0 0% 10%), hsl(0 0% 9%));
+    
+    --shadow-glow: 0 0 0 1px hsl(217 91% 60% / 0.1), 0 1px 3px 0 hsl(217 91% 60% / 0.2);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+
+  h1 { @apply text-4xl lg:text-5xl; }
+  h2 { @apply text-3xl lg:text-4xl; }
+  h3 { @apply text-2xl lg:text-3xl; }
+  h4 { @apply text-xl lg:text-2xl; }
+}
+
+@layer components {
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .card-gradient {
+    background: var(--gradient-card);
+  }
+  
+  .feature-gradient {
+    background: var(--gradient-feature);
+  }
+  
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-medium { box-shadow: var(--shadow-medium); }
+  .shadow-strong { box-shadow: var(--shadow-strong); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  
+  .hover-lift {
+    transition: var(--transition-smooth);
+  }
+  
+  .hover-lift:hover {
+    transform: var(--hover-lift);
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .btn-research {
+    @apply bg-research text-research-foreground hover:opacity-90 shadow-soft;
+  }
+  
+  .btn-collaboration {
+    @apply bg-collaboration text-collaboration-foreground hover:opacity-90 shadow-soft;
+  }
+  
+  .btn-publication {
+    @apply bg-publication text-publication-foreground hover:opacity-90 shadow-soft;
+  }
+  
+  /* Professional Button Styles */
+  .btn-professional {
+    @apply bg-primary text-primary-foreground hover:bg-primary-dark shadow-soft rounded-lg px-4 py-2 font-medium transition-all duration-200;
+  }
+  
+  .btn-professional:hover {
+    @apply shadow-medium transform translate-y-[-1px];
+  }
+  
+  /* Card Improvements */
+  .card-professional {
+    @apply bg-card border border-card-border rounded-xl shadow-soft hover:shadow-medium transition-all duration-200;
+  }
+  
+  .card-professional:hover {
+    @apply transform translate-y-[-1px];
+  }
+}
