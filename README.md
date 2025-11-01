@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 =======
 # 🔬 Open Science Nexus
@@ -106,21 +106,6 @@ python seed_templates.py
 
 ---
 
-## 📚 Documentation
-
-### Implementation Guides
-- [`PHASE1_COMPLETE_FULL_SUMMARY.md`](PHASE1_COMPLETE_FULL_SUMMARY.md) - Projects & invitations
-- [`PHASE2_DOCUMENT_MANAGEMENT_COMPLETE.md`](PHASE2_DOCUMENT_MANAGEMENT_COMPLETE.md) - Documents & versioning
-- [`PHASE3_SIMPLIFIED_EDITOR_COMPLETE.md`](PHASE3_SIMPLIFIED_EDITOR_COMPLETE.md) - Tiptap rich text editor
-- [`PHASE4_SOCIAL_FEED_COMPLETE.md`](PHASE4_SOCIAL_FEED_COMPLETE.md) - LinkedIn-style social feed 🆕
-
-### Quick References
-- [`QUICK_START_SOCIAL_FEED.md`](QUICK_START_SOCIAL_FEED.md) - Social feed quick guide 🆕
-- [`TESTING_SOCIAL_FEED.md`](TESTING_SOCIAL_FEED.md) - Test scenarios 🆕
-- [`PHASE4_IMPLEMENTATION_SUMMARY.md`](PHASE4_IMPLEMENTATION_SUMMARY.md) - Executive summary 🆕
-
-### Bug Fixes
-- [`BUGFIX_TEMPLATES_HTML_FORMAT.md`](BUGFIX_TEMPLATES_HTML_FORMAT.md) - Template formatting fix
 
 ---
 
@@ -393,7 +378,7 @@ This project is licensed under the MIT License.
 
 ## 👥 Authors
 
-- **Your Name** - *Initial work*
+- ** Ritesh Lokhande** - *Initial work*
 
 ---
 
@@ -411,7 +396,7 @@ This project is licensed under the MIT License.
 
 - **Documentation**: See `/docs` folder
 - **Issues**: GitHub Issues
-- **Email**: your-email@example.com
+- **Email**: riteshlokhande28@gmail.com
 
 ---
 
